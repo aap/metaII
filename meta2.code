@@ -1,0 +1,211 @@
+	ADR PROGRAM
+OUT1
+	TST '*1'
+	BF  A01
+	CL  'GN1'
+	OUT
+A01
+	BT  A02
+	TST '*2'
+	BF  A03
+	CL  'GN2'
+	OUT
+A03
+	BT  A02
+	TST '*'
+	BF  A04
+	CL  'CI'
+	OUT
+A04
+	BT  A02
+	SR
+	BF  A05
+	CL  'CL '
+	CI
+	OUT
+A05
+A02
+	R
+OUTPUT
+	TST '.OUT'
+	BF  A06
+	TST '('
+	BE
+A07
+	CLL OUT1
+	BT  A07
+	SET
+	BE
+	TST ')'
+	BE
+A06
+	BT  A08
+	TST '.LABEL'
+	BF  A09
+	CL  'LB'
+	OUT
+	CLL OUT1
+	BE
+A09
+A08
+	BF  A10
+	CL  'OUT'
+	OUT
+A10
+A11
+	R
+EX3
+	ID
+	BF  A12
+	CL  'CLL'
+	CI
+	OUT
+A12
+	BT  A13
+	SR
+	BF  A14
+	CL  'TST'
+	CI
+	OUT
+A14
+	BT  A13
+	TST '.ID'
+	BF  A15
+	CL  'ID'
+	OUT
+A15
+	BT  A13
+	TST '.NUMBER'
+	BF  A16
+	CL  'NUM'
+	OUT
+A16
+	BT  A13
+	TST '.STRING'
+	BF  A17
+	CL  'SR'
+	OUT
+A17
+	BT  A13
+	TST '('
+	BF  A18
+	CLL EX1
+	BE
+	TST ')'
+	BE
+A18
+	BT  A13
+	TST '.EMPTY'
+	BF  A19
+	CL  'SET'
+	OUT
+A19
+	BT  A13
+	TST '$'
+	BF  A20
+	LB
+	GN1
+	OUT
+	CLL EX3
+	BE
+	CL  'BT '
+	GN1
+	OUT
+	CL  'SET'
+	OUT
+A20
+A13
+	R
+EX2
+	CLL EX3
+	BF  A21
+	CL  'BF '
+	GN1
+	OUT
+A21
+	BT  A22
+	CLL OUTPUT
+	BF  A23
+A23
+A22
+	BF  A24
+A25
+	CLL EX3
+	BF  A26
+	CL  'BE'
+	OUT
+A26
+	BT  A27
+	CLL OUTPUT
+	BF  A28
+A28
+A27
+	BT  A25
+	SET
+	BE
+	LB
+	GN1
+	OUT
+A24
+A29
+	R
+EX1
+	CLL EX2
+	BF  A30
+A31
+	TST '/'
+	BF  A32
+	CL  'BT '
+	GN1
+	OUT
+	CLL EX2
+	BE
+A32
+A33
+	BT  A31
+	SET
+	BE
+	LB
+	GN1
+	OUT
+A30
+A34
+	R
+ST
+	ID
+	BF  A35
+	LB
+	CI
+	OUT
+	TST '='
+	BE
+	CLL EX1
+	BE
+	TST '.,'
+	BE
+	CL  'R'
+	OUT
+A35
+A36
+	R
+PROGRAM
+	TST '.SYNTAX'
+	BF  A37
+	ID
+	BE
+	CL  'ADR'
+	CI
+	OUT
+A38
+	CLL ST
+	BT  A38
+	SET
+	BE
+	TST '.END'
+	BE
+	CL  'END'
+	OUT
+A37
+A39
+	R
+	END
